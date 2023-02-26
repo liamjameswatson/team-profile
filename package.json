@@ -1,0 +1,35 @@
+{
+  "name": "team-profile",
+  "version": "1.0.0",
+  "description": "A project that builds a team html page from the command line",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liamjameswatson/team-profile.git"
+  },
+  "keywords": [
+    "node",
+    "command",
+    "line",
+    "team",
+    "profile",
+    "javascript",
+    "team",
+    "build"
+  ],
+  "author": "Liam Watson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liamjameswatson/team-profile/issues"
+  },
+  "homepage": "https://github.com/liamjameswatson/team-profile#readme",
+  "dependencies": {
+    "inquirer": "^6.5.0"
+  }
+}
