@@ -52,6 +52,29 @@ function init() {
   });
 }
 
+const questionEngineer = [
+  {
+    type: "input",
+    name: "engineerName",
+    message: "Enter Engineer's Name:",
+  },
+  {
+    type: "input",
+    name: "engineerId",
+    message: "Enter Engineer's Id:",
+  },
+  {
+    type: "input",
+    name: "engineerEmail",
+    message: "Enter Engineer's Email Address:",
+  },
+  {
+    type: "input",
+    name: "engineerGithub",
+    message: "Enter Engineer's Github Username:",
+  },
+];
+
 // calls the prompt function
 init();
 
