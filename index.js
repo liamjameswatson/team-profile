@@ -75,6 +75,18 @@ const questionEngineer = [
   },
 ];
 
+inquirer.prompt(questionEngineer).then((answers) => {
+  const engineer = new Engineer(
+    answers.engineerName,
+    answers.engineerId,
+    answers.engineerEmail,
+    answers.engineerGithub
+  );
+
+  // Display a success message and return to the main menu
+  console.log(`Success. Added ${engineer.getName()} to database.`);
+  console.log(answers);
+});
+
 // calls the prompt function
 init();
-
