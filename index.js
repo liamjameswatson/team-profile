@@ -91,5 +91,46 @@ function addEngineer() {
 }
 // addEngineer();
 
+function addIntern() {
+  const questionIntern = [
+    {
+      type: "input",
+      name: "internName",
+      message: "Enter Intern's Name:",
+    },
+    {
+      type: "input",
+      name: "internId",
+      message: "Enter Intern's Id:",
+    },
+    {
+      type: "input",
+      name: "internEmail",
+      message: "Enter Intern's Email Address:",
+    },
+    {
+      type: "input",
+      name: "internSchool",
+      message: "Enter Intern's School:",
+    },
+  ];
+
+  inquirer.prompt(questionIntern).then((answers) => {
+    const intern = new Intern(
+      answers.internName,
+      answers.internId,
+      answers.internEmail,
+      answers.internSchool
+    );
+
+    // Display a success message and return to the main menu
+    console.log(`Success. Added ${intern.getName()} to database.`);
+    console.log(answers);
+    
+  });
+}
+
+addIntern()
+
 // calls the prompt function
-init();
+// init();
