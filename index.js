@@ -52,6 +52,44 @@ function init() {
   });
 }
 
+function addEngineer() {
+  const questionEngineer = [
+    {
+      type: "input",
+      name: "engineerName",
+      message: "Enter Engineer's Name:",
+    },
+    {
+      type: "input",
+      name: "engineerId",
+      message: "Enter Engineer's Id:",
+    },
+    {
+      type: "input",
+      name: "engineerEmail",
+      message: "Enter Engineer's Email Address:",
+    },
+    {
+      type: "input",
+      name: "engineerGithub",
+      message: "Enter Engineer's Github Username:",
+    },
+  ];
+
+  inquirer.prompt(questionEngineer).then((answers) => {
+    const engineer = new Engineer(
+      answers.engineerName,
+      answers.engineerId,
+      answers.engineerEmail,
+      answers.engineerGithub
+    );
+
+    // Display a success message and return to the main menu
+    console.log(`Success. Added ${engineer.getName()} to database.`);
+    console.log(answers);
+  });
+}
+// addEngineer();
+
 // calls the prompt function
 init();
-
