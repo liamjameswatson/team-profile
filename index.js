@@ -65,11 +65,12 @@ function init() {
   });
 }
 
+// shows the menu to the user in inquirer prompt
 function showMenu() {
   console.log("Choose an option:");
-
   inquirer
     .prompt([
+      // choose from the list of options provided in the employeeChoice array
       {
         type: "list",
         name: "option",
@@ -79,11 +80,22 @@ function showMenu() {
     ])
     .then((answer) => {
       switch (answer.option) {
+        // if engineer is selected, the add engineer function is triggered
         case "Add an engineer":
           addEngineer();
           break;
+        // if intern is selected, the add intern function is called
         case "Add an intern":
           addIntern();
+          break;
+        // if user finishes the building the team the createTeam function is called
+        case "Finish building the team":
+          console.log("Team building complete!");
+          createTeam();
+          break;
+        default:
+          console.log("Invalid option selected.");
+          showMenu();
           break;
       }
     });
@@ -176,7 +188,21 @@ function addIntern() {
   });
 }
 
-// addIntern();
+// function to build our team
+function createTeam() {
+  // render our team using render function, create a const html, and passes the employee array into the render function
+  const html = render(employeeArray);
+
+  // write the rendered template to a file passing in the folder and the const html
+  fs.writeFile(outputPath, html, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      // shows the file location of index.html
+      console.log(`Team saved to ${outputPath}`);
+    }
+  });
+}
 
 // calls the prompt function
 init();
