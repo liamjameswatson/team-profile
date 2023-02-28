@@ -14,6 +14,12 @@ const render = require("./src/page-template.js");
 
 // An array to push the classes too, that are created in the prompts
 const employeeArray = [];
+// array of questions for user
+const employeeChoice = [
+  "Add an engineer",
+  "Add an intern",
+  "Finish building the team",
+];
 
 // Ask prompt questions for the Manager input
 const questionManager = [
@@ -55,7 +61,32 @@ function init() {
     // push manager class to employee array
     employeeArray.push(manager);
     console.log(manager);
+    showMenu();
   });
+}
+
+function showMenu() {
+  console.log("Choose an option:");
+
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "option",
+        message: "What to do next?",
+        choices: employeeChoice,
+      },
+    ])
+    .then((answer) => {
+      switch (answer.option) {
+        case "Add an engineer":
+          addEngineer();
+          break;
+        case "Add an intern":
+          addIntern();
+          break;
+      }
+    });
 }
 
 // function to run the prompt, get answers back, and store in an Engineer instance of the manager class.
@@ -96,6 +127,7 @@ function addEngineer() {
     console.log(`Success. Added ${engineer.getName()} to database.`);
     // Push engineer class to employee array
     employeeArray.push(engineer);
+    showMenu();
     console.log(answers);
   });
 }
@@ -140,6 +172,7 @@ function addIntern() {
     // push intern class to employee array
     employeeArray.push(intern);
     console.log(answers);
+    showMenu();
   });
 }
 
