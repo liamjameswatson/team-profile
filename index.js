@@ -1,5 +1,3 @@
-// TODO: Write Code to gather information about the development team members, and render the HTML file.
-
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -9,8 +7,10 @@ const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+const outputCss = path.join(OUTPUT_DIR, "style.css");
 
 const render = require("./src/page-template.js");
+const renderCss = require("./src/css-template.js");
 
 // An array to push the classes too, that are created in the prompts
 const employeeArray = [];
@@ -60,7 +60,6 @@ function init() {
     console.log(`Success. Added ${manager.getName()} to database.`);
     // push manager class to employee array
     employeeArray.push(manager);
-    console.log(manager);
     showMenu();
   });
 }
@@ -140,7 +139,6 @@ function addEngineer() {
     // Push engineer class to employee array
     employeeArray.push(engineer);
     showMenu();
-    console.log(answers);
   });
 }
 // addEngineer();
@@ -183,7 +181,6 @@ function addIntern() {
     console.log(`Success. Added ${intern.getName()} to database.`);
     // push intern class to employee array
     employeeArray.push(intern);
-    console.log(answers);
     showMenu();
   });
 }
@@ -202,9 +199,18 @@ function createTeam() {
       console.log(`Team saved to ${outputPath}`);
     }
   });
+
+  // As above but renders the css
+  const css = renderCss();
+
+  fs.writeFile(outputCss, css, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(`Styles generated to ${outputPath}`);
+    }
+  });
 }
 
 // calls the prompt function
 init();
-
-// console.log(employeeArray);
