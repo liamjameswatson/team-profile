@@ -12,8 +12,17 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
 
+// An array to push the classes too, that are created in the prompts
+const employeeArray = [];
+// array of questions for user
+const employeeChoice = [
+  "Add an engineer",
+  "Add an intern",
+  "Finish building the team",
+];
+
 // Ask prompt questions for the Manager input
-const questionManagger = [
+const questionManager = [
   {
     type: "input",
     name: "managerName",
@@ -38,7 +47,8 @@ const questionManagger = [
 
 // function to run the prompt, get answers back, and store in a manager instance of the manager class.
 function init() {
-  inquirer.prompt(questionManagger).then((answers) => {
+  inquirer.prompt(questionManager).then((answers) => {
+    // make a new class based on the prompt information
     const manager = new Manager(
       answers.managerName,
       answers.managerId,
@@ -48,10 +58,38 @@ function init() {
 
     // Display a success message and return to the main menu
     console.log(`Success. Added ${manager.getName()} to database.`);
-    console.log(answers);
+    // push manager class to employee array
+    employeeArray.push(manager);
+    console.log(manager);
+    showMenu();
   });
 }
 
+function showMenu() {
+  console.log("Choose an option:");
+
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "option",
+        message: "What to do next?",
+        choices: employeeChoice,
+      },
+    ])
+    .then((answer) => {
+      switch (answer.option) {
+        case "Add an engineer":
+          addEngineer();
+          break;
+        case "Add an intern":
+          addIntern();
+          break;
+      }
+    });
+}
+
+// function to run the prompt, get answers back, and store in an Engineer instance of the manager class.
 function addEngineer() {
   const questionEngineer = [
     {
@@ -77,6 +115,7 @@ function addEngineer() {
   ];
 
   inquirer.prompt(questionEngineer).then((answers) => {
+    // creates a new class based on the answers
     const engineer = new Engineer(
       answers.engineerName,
       answers.engineerId,
@@ -86,11 +125,15 @@ function addEngineer() {
 
     // Display a success message and return to the main menu
     console.log(`Success. Added ${engineer.getName()} to database.`);
+    // Push engineer class to employee array
+    employeeArray.push(engineer);
+    showMenu();
     console.log(answers);
   });
 }
 // addEngineer();
 
+// function to run the prompt, get answers back, and store in a Intern instance of the manager class.
 function addIntern() {
   const questionIntern = [
     {
@@ -116,6 +159,7 @@ function addIntern() {
   ];
 
   inquirer.prompt(questionIntern).then((answers) => {
+    // creates a new class based on the answers
     const intern = new Intern(
       answers.internName,
       answers.internId,
@@ -125,12 +169,16 @@ function addIntern() {
 
     // Display a success message and return to the main menu
     console.log(`Success. Added ${intern.getName()} to database.`);
+    // push intern class to employee array
+    employeeArray.push(intern);
     console.log(answers);
-    
+    showMenu();
   });
 }
 
-addIntern()
+// addIntern();
 
 // calls the prompt function
-// init();
+init();
+
+// console.log(employeeArray);
